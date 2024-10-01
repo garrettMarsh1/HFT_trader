@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package priceservice;
+
+service PriceService {
+  rpc StreamPrices (PriceRequest) returns (stream PriceResponse) {}
+  rpc SendSignal (SignalRequest) returns (SignalResponse) {}
+}
+
+message PriceRequest {}
+
+message PriceResponse {
+  string timestamp = 1;
+  double price = 2;
+  double confidence_interval = 3;
+  string status = 4;
+}
+
+message SignalRequest {
+  string timestamp = 1;
+  string action = 2;
+  double price = 3;
+}
+
+message SignalResponse {
+  bool success = 1;
+}
